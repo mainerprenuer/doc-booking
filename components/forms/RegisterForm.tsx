@@ -14,7 +14,9 @@ import "react-phone-number-input/style.css";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { GenderOptions } from "@/constants";
+import { Doctors, GenderOptions } from "@/constants";
+import { SelectItem } from "../ui/select";
+import Image from "next/image";
 
 export const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
@@ -124,7 +126,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
                                             value={option} 
                                             id={option} />
                                         <label htmlFor={option}
-                                            className="cursor-right">
+                                            className="cursor-pointer">
                                             {option}
                                         </label>
                                                 
@@ -137,12 +139,75 @@ export const RegisterForm = ({ user }: { user: User }) => {
             </div>
 
             <div className="flex flex-col gap-6 xl:flex-row">
+                <CustomFormField
+                    fieldType={FormFieldType.INPUT} 
+                    control={form.control}
+                    name="address"
+                    label="Address"
+                    placeholder="12th Street, Kano"
+               />
+
+                <CustomFormField
+                    fieldType={FormFieldType.INPUT} 
+                    control={form.control}
+                    name="occupation"
+                    label="Occupation"
+                    placeholder="Software Engineer"
+                    
+                />
 
             </div>
 
             <div className="flex flex-col gap-6 xl:flex-row">
+            <CustomFormField
+                    fieldType={FormFieldType.INPUT} 
+                    control={form.control}
+                    name="emergencyContactName"
+                    label="Emergency Contact Name"
+                    placeholder="Guardian's name"
+                    
+                />
 
+                <CustomFormField
+                    fieldType={FormFieldType.PHONE_INPUT} 
+                    control={form.control}
+                    name="emergencyContactNumber"
+                    label="Emergency Contact Number"
+                    placeholder="+234 07031313131"
+                />
             </div>
+
+            <section className="space-y-6">
+                <div className="mb-9 space-y-1">
+                    <h2 className="sub-header">Medical Information</h2>
+                </div>
+            </section>
+
+            <CustomFormField
+                    fieldType={FormFieldType.SELECT} 
+                    control={form.control}
+                    name="primaryPhysician"
+                    label="Primary Physician"
+                    placeholder="Select a physician"
+                >
+                    {Doctors.map((doctor) => (
+                        <SelectItem 
+                            key={doctor.name}
+                            value={doctor.name}
+                        >
+                            <div className="flex cursor-pointer items-center gap-2">
+                                <Image
+                                    src={doctor.name}
+                                    width={32}
+                                    height={32}
+                                    alt={doctor.name}
+                                    className="rounded-full border-dark-500"
+                                />
+                                <p>{doctor.name}</p>
+                            </div>            
+                        </SelectItem>
+                    ))}
+                </CustomFormField>
 
             <div className="flex flex-col gap-6 xl:flex-row">
 
