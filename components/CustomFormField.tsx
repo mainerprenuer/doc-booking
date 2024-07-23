@@ -17,8 +17,12 @@ import { E164Number } from 'libphonenumber-js/core'
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
-import { Select, SelectTrigger } from '@radix-ui/react-select'
-import { SelectContent, SelectValue } from './ui/select'
+import { 
+    Select, 
+    SelectTrigger, 
+    SelectContent, 
+    SelectValue 
+} from './ui/select'
 
 
 export enum FormFieldType  {
@@ -117,9 +121,6 @@ const RenderField = ({ field, props }: {field: any; props: CustomProps }) => {
                  </FormControl>
             </div>
         )
-    case FormFieldType.SKELETON:
-        return renderSkeleton ? renderSkeleton
-        (field) : null
     case FormFieldType.SELECT:
         return (
             <FormControl>
@@ -138,7 +139,10 @@ const RenderField = ({ field, props }: {field: any; props: CustomProps }) => {
                     </SelectContent>
                 </Select>
             </FormControl>
-        )
+        ) 
+    case FormFieldType.SKELETON:
+        return renderSkeleton ? renderSkeleton
+        (field) : null
     default:
         break;
    }
