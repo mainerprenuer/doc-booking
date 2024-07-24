@@ -159,7 +159,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
             </div>
 
             <div className="flex flex-col gap-6 xl:flex-row">
-            <CustomFormField
+                <CustomFormField
                     fieldType={FormFieldType.INPUT} 
                     control={form.control}
                     name="emergencyContactName"
@@ -189,7 +189,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
                     name="primaryPhysician"
                     label="Primary Physician"
                     placeholder="Select a physician"
-                >
+            >
                     {Doctors.map((doctor) => (
                         <SelectItem 
                             key={doctor.name}
@@ -210,11 +210,60 @@ export const RegisterForm = ({ user }: { user: User }) => {
                 </CustomFormField>
 
             <div className="flex flex-col gap-6 xl:flex-row">
+                <CustomFormField
+                    fieldType={FormFieldType.INPUT} 
+                    control={form.control}
+                    name="insuranceProvider"
+                    label="Insurance Provider"
+                    placeholder="BlueCross BlueShield"
+               />
 
+                <CustomFormField
+                    fieldType={FormFieldType.INPUT} 
+                    control={form.control}
+                    name="insurancePolicyNumber"
+                    label="Insurance Policy Number"
+                    placeholder="ABC0123456789"
+                    
+                />
             </div>
 
             <div className="flex flex-col gap-6 xl:flex-row">
+            <CustomFormField
+                    fieldType={FormFieldType.TEXTAREA} 
+                    control={form.control}
+                    name="allergies"
+                    label="Allergies (if any)"
+                    placeholder="groundnuts, fish, sesame"
+               />
 
+                <CustomFormField
+                    fieldType={FormFieldType.TEXTAREA} 
+                    control={form.control}
+                    name="currentMedication"
+                    label="Current Medication (if any)"
+                    placeholder="Paracetamol 200mg, contact 500mg"
+                    
+                />
+            </div>
+
+            <div className="flex flex-col gap-6 xl:flex-row">
+                <CustomFormField
+                    fieldType={FormFieldType.TEXTAREA} 
+                    control={form.control}
+                    name="familyMedicalHistory"
+                    label="Family Medical History"
+                    placeholder="Father had diabetis, Mother had heart disease"
+               />
+
+                <CustomFormField
+                    fieldType={FormFieldType.TEXTAREA} 
+                    control={form.control}
+                    name="pastMedicalHistory"
+                    label="Past Medical (History)"
+                    placeholder="Appendectomy, Ulcer"
+                    
+                />
             </div>
          
             <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>

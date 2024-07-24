@@ -23,6 +23,7 @@ import {
     SelectContent, 
     SelectValue 
 } from './ui/select'
+import { Textarea } from './ui/textarea'
 
 
 export enum FormFieldType  {
@@ -83,6 +84,17 @@ const RenderField = ({ field, props }: {field: any; props: CustomProps }) => {
                       
                 </FormControl>
             </div>
+        )
+    case FormFieldType.TEXTAREA:
+        return (
+            <FormControl>
+                <Textarea 
+                placeholder={placeholder}
+                {...field}
+                className='shad-textArea'
+                disabled={props.disabled}
+                />
+            </FormControl>
         )
     case FormFieldType.PHONE_INPUT:
         return (
