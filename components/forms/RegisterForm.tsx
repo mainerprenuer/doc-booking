@@ -14,9 +14,10 @@ import "react-phone-number-input/style.css";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Doctors, GenderOptions } from "@/constants";
+import { Doctors, GenderOptions, IdentificationTypes } from "@/constants";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
+import FileUploader from "../FileUploader";
 
 export const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
@@ -265,6 +266,50 @@ export const RegisterForm = ({ user }: { user: User }) => {
                     
                 />
             </div>
+
+            <section className="space-y-6">
+                <div className="mb-9 space-y-1">
+                    <h2 className="sub-header">Identification and Verification</h2>
+                </div>
+            </section> 
+            
+            <CustomFormField
+                    fieldType={FormFieldType.SELECT} 
+                    control={form.control}
+                    name="identificationType"
+                    label="Identification Type"
+                    placeholder="Select an identification type"
+            >
+                    {IdentificationTypes.map((type) => (
+                        < SelectItem key={type} value={type}>  
+                            {type}
+                        </SelectItem>
+                    ))}
+                </CustomFormField>
+
+                <CustomFormField
+                    fieldType={FormFieldType.INPUT} 
+                    control={form.control}
+                    name="identificationNumber"
+                    label="Identification Number"
+                    placeholder="123456789"
+                    iconAlt="email"
+                />
+
+                    <CustomFormField
+                        fieldType={FormFieldType.SKELETON} 
+                        control={form.control}
+                        name="identificationDOcument"
+                        label="Scanned Copy of Identification Document"
+                        renderSkeleton={(field) => (
+                            <FormControl>
+                                <FileUploader 
+                                    files={field.value}
+                                    onChange={field.onChange}
+                                    />
+                            </FormControl>
+                        )}
+                    />  
          
             <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
