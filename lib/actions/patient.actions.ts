@@ -35,15 +35,15 @@ try {
     }
  }
 
- export const registerPatient = async ({ IdentificationDocument, ...patient }:
+ export const registerPatient = async ({ identificationDocument, ...patient }:
     RegisterUserParams) => {
         try {
             let file;
 
-            if(IdentificationDocument) {
+            if(identificationDocument) {
                 const inputFile = InputFile.fromBuffer(
-                    IdentificationDocument?.get('blobFile') as Blob,
-                    IdentificationDocument?.get('fileName') as string,
+                    identificationDocument?.get('blobFile') as Blob,
+                    identificationDocument?.get('fileName') as string,
                 )
 
                 file = await storage.createFile(BUCKET_ID!, ID.unique(), inputFile)
@@ -54,14 +54,15 @@ try {
                 PATIENT_COLLECTION_ID!,
                 ID.unique(),
                 {
-                    IdentificationDocumentId: file?.$id || null,
-                    IdentificationDocumentUrl:
+                    identificationDocumentId: file?.$id || null,
+                    identificationDocumentUrl:
                      `${ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file?.$id}/view?project=${PROJECT_ID}`,
                     ...patient 
                 }
             )
 
             return parseStringify(newPatient);
+            
         } catch (error) {
             console.log(error);
         }
